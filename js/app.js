@@ -4,7 +4,9 @@ function movieResults(movies){
 	var movies_arr = movies.Search
 	var moviesHTML = '';
 	$.each(movies_arr, function(index, movie){
-		moviesHTML += '<li><div class="poster-wrap">';
+		moviesHTML += '<li>'
+		moviesHTML += '<a href="http://www.imdb.com/title/' + movie.imdbID + '" target="_blank">' 
+		moviesHTML += '<div class="poster-wrap">';
 		if(movie.Poster === 'N/A'){
 			moviesHTML +='<i class="material-icons poster-placeholder">crop_original</i>'
 		} else {
@@ -12,7 +14,7 @@ function movieResults(movies){
 		moviesHTML += '<img class="movie-poster" src="' + movie.Poster + '">';
 	}
 		moviesHTML += '</div><span class="movie-title">' + movie.Title + '</span>';
-		moviesHTML += '<span class="movie-year">' + movie.Year + '</span></li>';
+		moviesHTML += '<span class="movie-year">' + movie.Year + '</span></a></li>';
 	})
 
 	if (movies.Error === "Movie not found!"){

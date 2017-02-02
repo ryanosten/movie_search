@@ -5,10 +5,20 @@ function movieResults(movies){
 	var moviesHTML = '';
 	$.each(movies_arr, function(index, movie){
 		moviesHTML += '<li><div class="poster-wrap">';
-		moviesHTML += '<img class="movie-poster" src="' + movie.Poster + '"></div>';
-		moviesHTML += '<span class="movie-title">' + movie.Title + '</span>';
+		if(movie.Poster === 'N/A'){
+			moviesHTML +='<i class="material-icons poster-placeholder">crop_original</i>'
+		} else {
+
+		moviesHTML += '<img class="movie-poster" src="' + movie.Poster + '">';
+	}
+		moviesHTML += '</div><span class="movie-title">' + movie.Title + '</span>';
 		moviesHTML += '<span class="movie-year">' + movie.Year + '</span></li>';
 	})
+
+	if (movies.Error === "Movie not found!"){
+		moviesHTML += '<li class="no-movies"><i class="material-icons icon-help">help_outline</i>No movies found that match: ' 
+		moviesHTML += $('#search').val() + ' ' + $('#year').val() + '</li>'
+	}
 
 	$('#movies').html(moviesHTML);
 };
@@ -44,4 +54,5 @@ $('form').on('submit', function(e){
 	//build html list based on results
 //open request
 //send request
+
 

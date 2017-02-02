@@ -114,6 +114,10 @@ button {
   margin: 1.925em 0 0;
 }
 
+#movies li.no-movies {
+  width: 100%;
+}
+
 .movie-list a {
   display: block;
   margin: auto;

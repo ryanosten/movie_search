@@ -1,12 +1,11 @@
 //after receiving the response from API request, generate list of movies
+
 function movieResults(movies){
 	console.log(movies);
 	var movies_arr = movies.Search
 	var moviesHTML = '';
 	$.each(movies_arr, function(index, movie){
-		moviesHTML += '<li>'
-		moviesHTML += '<a href="http://www.imdb.com/title/' + movie.imdbID + '" target="_blank">' 
-		moviesHTML += '<div class="poster-wrap">';
+		moviesHTML += '<li><div class="poster-wrap">';
 		if(movie.Poster === 'N/A'){
 			moviesHTML +='<i class="material-icons poster-placeholder">crop_original</i>'
 		} else {
@@ -14,7 +13,7 @@ function movieResults(movies){
 		moviesHTML += '<img class="movie-poster" src="' + movie.Poster + '">';
 	}
 		moviesHTML += '</div><span class="movie-title">' + movie.Title + '</span>';
-		moviesHTML += '<span class="movie-year">' + movie.Year + '</span></a></li>';
+		moviesHTML += '<span class="movie-year">' + movie.Year + '</span></li>';
 	})
 
 	if (movies.Error === "Movie not found!"){
@@ -48,13 +47,14 @@ $('form').on('submit', function(e){
 	$.getJSON(httpURL, searchData, movieResults)
 })
 
+//movie description page
+
+$('ul').on('click', '.poster-wrap', function(){
+	$('#movies').hide();
+	
+	//API call to get movie details
 
 
-
-//specify callback function
-	//parse response
-	//build html list based on results
-//open request
-//send request
+})
 
 

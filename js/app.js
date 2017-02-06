@@ -5,7 +5,7 @@ function movieResults(movies){
 	var movies_arr = movies.Search
 	var moviesHTML = '';
 	$.each(movies_arr, function(index, movie){
-		moviesHTML += '<li><div class="poster-wrap">';
+		moviesHTML += '<li><div id="' + movie.imdbID + '" class="poster-wrap">';
 		if(movie.Poster === 'N/A'){
 			moviesHTML +='<i class="material-icons poster-placeholder">crop_original</i>'
 		} else {
@@ -34,27 +34,43 @@ $('form').on('submit', function(e){
 
 	//data for query string
 	var searchData = {
-	"s": title,
-	"y": year,
-	"type": "movie",
-	"r": "json",
+		"s": title,
+		"y": year,
+		"type": "movie",
+		"r": "json"
+	}
+
+	//endpoint for AJAX GET request
+	var httpURL = 'http://www.omdbapi.com/';
+
+	//create an ajax request to the OMDB API
+	$.getJSON(httpURL, searchData, movieResults);
+})
+
+//movie description page
+
+function movieDetail(movie){
+	console.log(movie);
+}
+
+$('ul').on('click', '.poster-wrap', function(){
+	$('#movies').hide();
+	$('.movie-detail').show();
+	
+	//get imdbID of element clicked
+	var imdbID = $(this).attr('id');
+
+	//API call to get movie details
+	var searchData = {
+		"i": imdbID,
+		"r": "json"
 	}
 
 	//endpoint for AJAX GET request
 	var httpURL = 'http://www.omdbapi.com/?';
 
 	//create an ajax request to the OMDB API
-	$.getJSON(httpURL, searchData, movieResults)
-})
-
-//movie description page
-
-$('ul').on('click', '.poster-wrap', function(){
-	$('#movies').hide();
-	
-	//API call to get movie details
-
-
+	$.getJSON(httpURL, searchData, movieDetail);
 })
 
 

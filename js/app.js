@@ -59,6 +59,7 @@ $('ul').on('click', '.poster-wrap', function(){
 	
 	//get imdbID of element clicked
 	var imdbID = $(this).attr('id');
+	console.log(imdbID);
 
 	//API call to get movie details
 	var searchData = {
@@ -67,7 +68,7 @@ $('ul').on('click', '.poster-wrap', function(){
 	}
 
 	//endpoint for AJAX GET request
-	var httpURL = 'http://www.omdbapi.com/?';
+	var httpURL = 'http://www.omdbapi.com/';
 
 	//create an ajax request to the OMDB API
 	$.getJSON(httpURL, searchData, movieDetail);
